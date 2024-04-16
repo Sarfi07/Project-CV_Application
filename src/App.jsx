@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import './App.css';
+import './styles/preview.css';
+import './styles/form.css';
 import PersonalInfo from './components/PersonalInfo';
 import Educationalnfo from './components/EducationalInfo';
 import PracticalEx from './components/PracticalEx';
-// import { format } from 'date-fns';
 
-function App() {
+import { format } from 'date-fns';
+
+export default function App() {
   const [personalInfo, setPersonalInfo] = useState({
     name: '',
     email: '',
@@ -81,7 +84,13 @@ function App() {
   function handleEducationalInfoChange(index, e) {
     const { name, value } = e.target;
     const updatedEducation = [...educationalInfo];
-    updatedEducation[index][name] = value;
+
+    if (name === 'from' || name == 'until') {
+      const date = formatDate(new Date(value));
+      updatedEducation[index][name] = date;
+    } else {
+      updatedEducation[index][name] = value;
+    }
     setEducationalInfo(updatedEducation);
   }
 
@@ -110,9 +119,9 @@ function App() {
     setEducationalInfo(updatedEducationWithIDs);
   }
 
-  // function formatDate(date) {
-  //   return format(date, 'MM, yyyy');
-  // }
+  function formatDate(date) {
+    return format(date, 'MM, yyyy');
+  }
 
   return (
     <>
@@ -126,37 +135,85 @@ function App() {
           info={educationalInfo}
           handleChange={handleEducationalInfoChange}
           removeEducation={removeEducation}
+          addEducation={addEducation}
         />
-        <button onClick={addEducation}>Add Education</button>
 
         <PracticalEx
           info={practicalEx}
           handleChange={handPracticalInfoChange}
           removeEx={removeEx}
+          addPracticalEx={addPracticalEx}
         />
-        <button onClick={addPracticalEx}>Add Practical Experience</button>
       </div>
       <div className="preview">
         <div className="personalInfoPreview">
-          <h1>{personalInfo.name}</h1>
-          {personalInfo.email && <h3>Email: {personalInfo.email}</h3>}
-          {personalInfo.address && <p>Address: {personalInfo.address}</p>}
-          {personalInfo.phone && <p>Phone: {personalInfo.phone}</p>}
+          <h1 id="name">{personalInfo.name}</h1>
+          {personalInfo.email && (
+            <p>
+              <span>Email:</span> {personalInfo.email}
+            </p>
+          )}
+          {personalInfo.address && (
+            <p>
+              <span>Address:</span> {personalInfo.address}
+            </p>
+          )}
+          {personalInfo.phone && (
+            <p>
+              <span>Phone:</span> {personalInfo.phone}
+            </p>
+          )}
         </div>
-
+        <hr />
         <div className="educationalInfoPreview">
+          {educationalInfo[0].institution && (
+            <h3>
+              <u>Eduational Experience</u>
+            </h3>
+          )}
           {educationalInfo[0].institution &&
             educationalInfo.map((edu) => (
-              <div key={edu.institution}>
-                <p>Institution: {edu.institution}</p>
-                <p>Degree: {edu.degree}</p>
-                <p>Graduation Year: {edu.graduationYear}</p>
+              <div className="eduP" key={edu.institution}>
+                <p>
+                  <span>Institution: </span>
+                  {edu.institution}
+                </p>
+                <p>
+                  <span>Degree: </span>
+                  {edu.degree}
+                </p>
+                <p className="gradYearP">{edu.graduationYear}</p>
               </div>
             ))}
+        </div>
+
+        <div className="practicalExpP">
+          {practicalEx[0].companyName && (
+            <>
+              <hr />
+              <h3>
+                <u>Practical Experience</u>
+              </h3>
+              {practicalEx.map((exp) => (
+                <div className="expP" key={exp.id}>
+                  <p>
+                    <span>Company: </span>
+                    {exp.companyName}
+                  </p>
+                  <p>
+                    <span>Position: </span>
+                    {exp.position}
+                  </p>
+
+                  <p className="expDuration">
+                    {exp.from}: {exp.until}
+                  </p>
+                </div>
+              ))}
+            </>
+          )}
         </div>
       </div>
     </>
   );
 }
-
-export default App;

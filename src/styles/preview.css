@@ -1,0 +1,61 @@
+.personalInfoPreview {
+  text-align: center;
+
+  p {
+    margin: 0;
+  }
+
+  span {
+    font-weight: bold;
+  }
+}
+
+.educationalInfoPreview {
+  text-align: center;
+  margin-left: 2rem;
+
+  .eduP {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    margin-top: 1rem;
+  }
+
+  p {
+    grid-column: 1 / 2;
+    margin: 0;
+    text-align: left;
+
+    span {
+      font-weight: bold;
+    }
+  }
+
+  p.gradYearP {
+    grid-column: 2 / 3;
+  }
+}
+
+.practicalExpP {
+  text-align: center;
+  margin-left: 2rem;
+
+  .expP {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    margin-top: 1rem;
+  }
+
+  p {
+    grid-column: 1 / 2;
+    margin: 0;
+    text-align: left;
+
+    span {
+      font-weight: bold;
+    }
+  }
+
+  p.expDuration {
+    grid-column: 2 / 3;
+  }
+}

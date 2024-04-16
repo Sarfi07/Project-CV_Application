@@ -3,12 +3,13 @@
   height: 100vh;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  column-gap: 2rem;
   margin: auto;
 }
 
 .form {
-  background-color: aqua;
   color: black;
+  padding-top: 2rem;
 }
 
 .preview {

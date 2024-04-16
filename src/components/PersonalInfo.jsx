@@ -1,6 +1,6 @@
 export default function PersonalInfo({ info, handleChange }) {
   return (
-    <>
+    <div className="personalInfoInput inputSec">
       <h2>Personal Information</h2>
       <input
         type="text"
@@ -32,6 +32,6 @@ export default function PersonalInfo({ info, handleChange }) {
         name="phone"
         placeholder="Phone Number"
       />
-    </>
+    </div>
   );
 }

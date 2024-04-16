@@ -2,9 +2,10 @@ export default function Educationalnfo({
   info,
   handleChange,
   removeEducation,
+  addEducation,
 }) {
   return (
-    <>
+    <div className="educationalInfoInput inputSec">
       <h2>Education</h2>
       {info.map((edu, index) => (
         <div key={edu.id}>
@@ -37,6 +38,9 @@ export default function Educationalnfo({
           )}
         </div>
       ))}
-    </>
+      <button className="addBtn" onClick={addEducation}>
+        Add Education
+      </button>
+    </div>
   );
 }

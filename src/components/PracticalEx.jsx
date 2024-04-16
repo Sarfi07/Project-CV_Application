@@ -1,6 +1,11 @@
-export default function PracticalEx({ info, handleChange, removeEx }) {
+export default function PracticalEx({
+  info,
+  handleChange,
+  removeEx,
+  addPracticalEx,
+}) {
   return (
-    <>
+    <div className="practicalExpInput inputSec">
       <h2>Practical Experience</h2>
       {info.map((exp, index) => (
         <div key={exp.id}>
@@ -21,7 +26,7 @@ export default function PracticalEx({ info, handleChange, removeEx }) {
           />
 
           <input
-            type="text"
+            type="month"
             placeholder="Worked From"
             name="from"
             value={exp.from}
@@ -29,7 +34,7 @@ export default function PracticalEx({ info, handleChange, removeEx }) {
           />
 
           <input
-            type="text"
+            type="month"
             placeholder="Worked Until"
             name="until"
             value={exp.until}
@@ -41,6 +46,10 @@ export default function PracticalEx({ info, handleChange, removeEx }) {
           )}
         </div>
       ))}
-    </>
+
+      <button className="addBtn" onClick={addPracticalEx}>
+        Add Practical Experience
+      </button>
+    </div>
   );
 }
